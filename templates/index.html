@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1>Jeff Bezos Is {{ compliment }}</h1>
+<p> has no idea and doesn't care who <a href='nora'>nora</a> is</p>
+<h1>Numbers</h1>
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.title }} created on {{ task.date }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
