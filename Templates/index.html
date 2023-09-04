@@ -3,6 +3,14 @@
 {% block main %}
 <h1>Jeff Bezos Is {{ compliment }}</h1>
 <p> has no idea and doesn't care who <a href='nora'>nora</a> is</p>
+
+<form action="/index" method="post">
+    {{ form.csrf_token }}
+    {{ form.title.label }}
+    {{ form.title }}
+    {{ form.submit }}
+</form>
+
 <h1>Numbers</h1>
 <ul>
     {% for task in tasks %}

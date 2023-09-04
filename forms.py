@@ -3,5 +3,9 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 class AddNumberForm(FlaskForm):
-    title = StringField('Enter a Number Between 1 and 100', validators=[DataRequired()])
+    title = StringField('Enter any Number', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class RandomPageForm(FlaskForm):
+    title = StringField('Go To Random Page')
     submit = SubmitField('Submit')

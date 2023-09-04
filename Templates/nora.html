@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title>Tasks</title>
-</head>
 <body>
 
 {% block main %}
@@ -28,21 +18,15 @@
     {{ form.submit }}
 </form>
 
-<div class="container-fluid">
-
-    <br>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-primary">
-          {{ message }}
-        </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <br>
-
-</div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <hr>
+      {{ message }}
+    <hr>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 {% endblock %}
 
