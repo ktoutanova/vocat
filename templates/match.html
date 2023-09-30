@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <title>Learn-App</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript"
+     src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<style>
+body {
+  background-color: linen;
+}
+
+
+button{
+	width: 100%;
+	border-radius: 10%;
+}
+
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+
+.game{	
+	width: 90%;
+	margin: 0 auto;
+}
+
+.container{	
+	display:flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.unsolved{
+	margin-bottom:25px;
+	justify-content: space-between;
+}
+
+.solved{
+	margin-right: 25px;
+}
+
+.pair_items{
+	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+	margin-bottom:25px;
+	padding: 25px;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.item{	
+	margin-right: 10px;
+}
+
+.pair{
+	margin-bottom: 25px;
+}
+
+.connector{
+	
+	
+	height:5px;
+	background-color: lightgreen;
+}
+
+
+@media screen and (min-width: 600px){
+	
+	.game{	
+		width: 50%;
+		margin: 0 auto;
+	}
+	
+	.container{
+		flex-direction: row;
+	}
+	
+	.solved{
+		margin-right:10px;
+	}
+	
+	.pair_items{
+		width: 30%;
+		flex-direction: column;
+	}
+	
+	.item{		
+		margin-right: 0;
+		margin-bottom:10px;
+	}
+	
+	.pair{
+		margin-right:25px;
+	}
+	
+	.myAnimal{
+	  width: 80px;
+	  height: 80px;
+	  color: white;
+	  border-radius: 50%;
+	  line-height: 80px;
+	  text-align: center;
+      cursor: pointer;
+    }
+
+.left{	
+	background-color: #68ad68;
+}
+
+
+.right{	
+	background-color: #a83295;
+}
+
+.selected{
+	background-color: grey;
+}
+	
+
+}
+</style>
+</head>
+<body>
+    <script>
+        $(function() {
+          $('button').bind('click', function() {
+             console.log('match');
+             var id = $( this ).attr('id');
+             var index = id.charAt(0);
+             var direction = 'unknown';
+             var opositeDirection = 'unknown';
+             if (id.endsWith('left')) {
+                direction = 'left';
+                opositeDirection = 'right';
+             } else if (id.endsWith('right')) {
+                direction = 'rigth';
+                opositeDirection = 'left';
+             }
+             var match = false;
+             var hasOpositeDirection = false;
+             var hasOtherSelected = false;
+             $('button:disabled').each(function(){
+                hasOtherSelected = true;
+                var newId = $( this ).attr('id');
+                if (newId.endsWith(direction)) {
+                    $(this).prop('disabled', false);
+                } else if (newId === index + ' + ' + opositeDirection){
+                    $(this).prop('hidden',true);
+                    match = true;
+                } else {
+                    $(this).prop('disabled', false);
+                    hasOpositeDirection = true;
+                }
+             });
+             if (match && hasOtherSelected) {
+                $(this).prop('hidden', true);
+             } else if (hasOtherSelected && hasOpositeDirection) {
+                 // error
+             } else {
+                $(this).prop("disabled",true);
+             }
+          });
+        });
+      </script>
+<div style="text-align:center">
+  <h1>
+    Learning is fun!
+  </h1>
+</div>
+<div class="game">
+
+	<div class="container unsolved">
+
+		<div class="pair_items left">
+            {%for key, value in keys.items()%}
+			<div  class="item">
+			   <button id = '{{key}} + left'> 
+				  {{value}}
+				</button>
+				
+			</div>
+			
+            {%endfor%}
+			
+		</div>
+		
+		
+		<div class="pair_items right">
+            {%for key, value in values.items()%}
+			<div class="item">
+			   <button id = '{{key}} + right'> 
+				   {{value}}
+				</button>	
+			 </div>
+             {%endfor%}
+
+	</div>
+
+
+	<div class="container solved">
+
+ 
+		<div class="pair">
+	
+		   <button> 
+			   Tinka
+			</button>
+			
+			<div class="connector"></div>
+			
+			<button>
+			   Тинка
+			</button>
+		
+		</div>
+
+
+	</div>
+	
+</div>
+
+</body>
+</html>

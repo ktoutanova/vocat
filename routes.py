@@ -5,6 +5,7 @@ from datetime import datetime
 
 from models import Task
 import forms
+from random_words_generator import initialiseGrid, shuffleKeys, shuffleValues
 
 @app.route('/')
 @app.route('/index')
@@ -27,3 +28,12 @@ def nora():
         flash('Jeff Bezos keeps your numbers safe')
         #return redirect(url_for('index'))
     return render_template('nora.html', number=number, form=form)
+
+
+@app.route('/bulgarians', methods=['GET'])
+def bulgarians():
+    global grid
+    grid = initialiseGrid()
+    keys = shuffleKeys(grid)
+    values = shuffleValues(grid)
+    return render_template('match.html',keys=keys, values=values)
